@@ -1,12 +1,13 @@
 import React from 'react';
-import '../styles/LearnSection.css'
+import LearnSection from '../LearnSection';
+
 
 
 function Learn() {
     return (
-        <div className='learn-section'>
-            <h1>LEARN SECTION</h1>
-        </div>
+        <>
+            <LearnSection />
+        </>
     );
 }
 

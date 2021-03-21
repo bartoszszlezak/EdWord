@@ -42,6 +42,13 @@ return(
                         </Link>
                     </li>
                 </ul>
+                
+                <Link to='/signin' className='navbar-but'>
+                    <button className='navbar-button'>
+                        Sign In
+                    </button>
+                </Link>
+                    
             </div>
           </nav>
       </>
