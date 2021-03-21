@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import './styles/Footer.css';
 
 function Footer() {
@@ -21,18 +20,20 @@ function Footer() {
                         target='_blank'
                         className='social-icon-link facebook'
                         aria-label='Facebook'
-                    >
+                        rel='noreferrer'
+                        >
                         <i className='fab fa-facebook-f' />
-                    </a>
-                    <a
-                        href='https://www.instagram.com/'
-                        target='_blank'
-                        className='social-icon-link instagram'
-                        aria-label='Instagram'
-                    >
-                        <i class='fab fa-instagram' />
-                    </a>
-                    </div>
+                        </a>
+                        <a
+                            href='https://www.instagram.com/'
+                            target='_blank'
+                            className='social-icon-link instagram'
+                            aria-label='Instagram'
+                            rel='noreferrer'
+                        >
+                            <i className='fab fa-instagram' />
+                        </a>
+                        </div>
                     
                 </div>
                 
