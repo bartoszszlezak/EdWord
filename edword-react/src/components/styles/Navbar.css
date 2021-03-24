@@ -74,6 +74,28 @@
     display: none;
 }
 
+.navbar-button{
+    width: 100px;
+    height: 50px;
+    color:#fff;
+    background: transparent;
+    border-radius: 5px;
+    border: 2px #fff solid;
+    font-size: 15px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    cursor: pointer;
+    outline: none;
+    transition: all 0.3s ease-out;
+}
+
+
+.navbar-button:hover{
+    background: #fff;
+    color: #242424;
+    transition: all 0.3s ease-out;
+}
+
+
 @media screen and (max-width: 840px) {
 
     .NavbarItems {
@@ -157,6 +179,14 @@
         background: #fff;
         color: #242424;
         transition: 250ms;
+    }
+
+    .navbar-button{
+        display: none;
+    }
+
+    .navbar-but{
+        display: none;
     }
 
 }

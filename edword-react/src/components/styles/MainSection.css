@@ -20,6 +20,7 @@ video {
       color: #fff;
       font-size: 110px;
       margin-top: -100px;   
+      font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif
   }
 
   .main-section > p{
@@ -27,12 +28,35 @@ video {
     font-size: 30px;
     margin-top: 20px;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif
+    
 }
+
+
+    .main-button{
+    margin-top: 50px;
+    width: 200px;
+    height: 50px;
+    background: #000000;
+    color: #fff;
+    border-radius: 5px;
+    border: 2px #fff solid;
+    transition: all 0.3s ease-out;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 30px;
+}
+
+    .main-button:hover{
+        transition: all 0.3s ease-out;
+        color: #000000;
+        background: #fff;
+        border: 2px #000000 solid;
+    }
 
 @media screen and (max-width: 870px){
     .main-section > h1{
         font-size: 70px;
         margin-top: -140px;
+
     }
 }
 

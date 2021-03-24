@@ -4,9 +4,9 @@ import {Link} from "react-router-dom";
 
 function Navbar(){
 
-    const [clicked, setState] = useState(false);
-    const mobileMenuOff = () => setState(false);
-    const changeClicked = () => setState(!clicked);
+    const [clicked, setClicked] = useState(false);
+    const mobileMenuOff = () => setClicked(false);
+    const changeClicked = () => setClicked(!clicked);
 
     
 return(
@@ -42,6 +42,13 @@ return(
                         </Link>
                     </li>
                 </ul>
+                
+                <Link to='/signin' className='navbar-but'>
+                    <button className='navbar-button'>
+                        Sign In
+                    </button>
+                </Link>
+                    
             </div>
           </nav>
       </>

@@ -8,7 +8,8 @@ function Footer() {
                 <div className='footer-created'>
                     <h2>Created by:</h2>
                     <p>Bartosz Szlęzak</p>
-                    <p>Cracow Uniwersity of Technology</p>
+                    <p>Cracow University of Technology</p>
+                    <p>All rights reserved ®</p>
                 </div>
                 <div className='footer-contact'>
                     <h2>Contact:</h2>
