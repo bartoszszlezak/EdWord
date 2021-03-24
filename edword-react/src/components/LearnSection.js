@@ -4,7 +4,9 @@ import './styles/LearnSection.css';
 function LearnSection() {
     return (
         <div className='learn-section'>
-            <h1>LEARN SECTION</h1>
+            <div className='flashcard'>
+                
+            </div>
         </div>
     )
 }
