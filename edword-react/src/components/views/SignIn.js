@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 // import SigninSection from '../SigninSection';
-import '../styles/SigninForm.css';
+import '../styles/SignIn.css';
 import video from '../../videos/video1.mp4';
 import SignInForm from '../SignInForm';
 
@@ -16,15 +16,12 @@ function SignIn() {
     const [error, setError] = useState("");
 
     const Login = details => {
-        console.log(details);
 
         if(details.email===randomUser.email && details.password === randomUser.password){
-            console.log("Logged in")
             setUser({
                 email: details.email
             });
         } else{
-            console.log("Wrong email or password!")
             setError("Wrong email or password!")
         }
     }

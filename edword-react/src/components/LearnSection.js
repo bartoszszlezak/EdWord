@@ -5,7 +5,7 @@ function LearnSection() {
     return (
         <div className='learn-section'>
             <div className='flashcard'>
-                
+                Elo
             </div>
         </div>
     )

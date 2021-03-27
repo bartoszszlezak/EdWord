@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import './styles/SigninForm.css';
+import './styles/SignIn.css';
 import { Link } from 'react-router-dom';
 
 function SignInForm({Login, error}) {
@@ -18,7 +18,7 @@ function SignInForm({Login, error}) {
                 <h1>Sign in</h1>
                 <div className='no-account-signup'>
                     <p>You don't have an account?</p>
-                    <Link to='/'>
+                    <Link to='/signup'>
                         <button className='sign-up'>
                             Sign Up
                         </button>
