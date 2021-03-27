@@ -6,7 +6,7 @@ function RevisionSection() {
         <div className='revision-section'>
             <h1>Revision SECTION</h1>
         </div>
-    )
+    );
 }
 
 export default RevisionSection
