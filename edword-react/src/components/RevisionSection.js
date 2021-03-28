@@ -1,10 +1,17 @@
 import React from 'react';
 import './styles/RevisionSection.css';
+import video from '../videos/video4.mp4'
 
 function RevisionSection() {
     return (
         <div className='revision-section'>
-            <h1>Revision SECTION</h1>
+            <video src={video} autoPlay loop muted />
+            <div className='flashcard' />
+            <div className='buttons-revision'>
+                <button>
+                    Next
+                </button>
+            </div>
         </div>
     );
 }
