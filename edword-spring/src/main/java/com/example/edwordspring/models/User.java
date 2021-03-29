@@ -1,10 +1,18 @@
 package com.example.edwordspring.models;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
 public class User {
 
     private String name;
     private String surname;
+
+    @Id
+    @GeneratedValue
     private Long id;
+
+    public User(){}
 
     public String getName() {
         return name;
