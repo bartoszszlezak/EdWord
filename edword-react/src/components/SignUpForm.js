@@ -13,15 +13,30 @@ const SignUpForm = ({submitForm}) => {
         <div className='signup-section'>
             <video src={video} autoPlay loop muted />
             <h1>Sign Up</h1>
-                <div className='account-signin'>
-                    <p>I have an account</p>
-                    <Link to='/signin'>
-                        <button className='sign-up'>
-                            Sign In
-                        </button>
-                    </Link>  
-                </div>
+            <div className='account-signin'>
+                <p>I have an account</p>
+                <Link to='/signin'>
+                    <button className='sign-up'>
+                        Sign In
+                    </button>
+                </Link>  
+            </div>
+            
             <form className='sign-up-form' onSubmit={handleSubmit}>
+
+                <div className='signup-inputs'>
+                    <input
+                        id='username'
+                        className='form-input'
+                        type='text'
+                        name='username'
+                        placeholder='Enter your username'
+                        value={values.username}
+                        onChange={handleChange}
+                    />
+                    {errors.username && <p>{errors.username}</p>}
+                </div>
+
                 <div className='signup-inputs'>
                     <input
                         id='email' 

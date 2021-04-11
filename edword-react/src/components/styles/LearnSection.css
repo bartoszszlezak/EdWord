@@ -21,7 +21,8 @@ video {
     height: 40%;
     border-radius: 15px;
     position: relative;  
-    perspective: 1000px; 
+    perspective: 1000px;
+    z-index: -1; 
   }
 
 
