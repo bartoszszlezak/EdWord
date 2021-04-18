@@ -20,7 +20,7 @@ const SignUpSection = () => {
             ) : (
                 <div className='succes-signup'>
                     <video src={video} autoPlay loop muted />
-                    <Link to='/learn'>
+                    <Link to='/signin'>
                         <button>Your account was created succesfully</button>
                     </Link>
                 </div>  

@@ -1,7 +1,13 @@
 import { useState, useEffect } from 'react';
+import axios from 'axios';
 
-const Service = (callback, validate) => {
+const api = axios.create({
+  baseURL: `http://localhost:8080`
+})
+
+const Service = (submitForm, validate) => {
   const [values, setValues] = useState({
+    username: '',
     email: '',
     password: '',
     passwordrep: ''
@@ -16,6 +22,7 @@ const Service = (callback, validate) => {
       ...values,
       [name]: value
     });
+    //console.log(values);
   };
 
   const handleSubmit = e => {
@@ -28,7 +35,15 @@ const Service = (callback, validate) => {
   useEffect(
     () => {
       if (Object.keys(errors).length === 0 && isSubmitting) {
-        callback();
+
+        api.post("http://localhost:8080/registration", values)
+            .then(response => {
+                if(response.data != null){
+                    console.log("wysyłam = " + values.username + " " + values.password + " " + values.email); 
+                }
+            });
+
+        submitForm();
       }
     },
     [errors]
