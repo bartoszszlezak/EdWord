@@ -7,6 +7,7 @@
     font-size: 1.5em;
     position: sticky;
     top: 0;
+    z-index: 1;
 }
 
 .nav-container{

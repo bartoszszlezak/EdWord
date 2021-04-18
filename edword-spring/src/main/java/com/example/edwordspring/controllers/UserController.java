@@ -14,6 +14,7 @@ import java.util.Optional;
 @CrossOrigin(origins = "http://localhost:3000")
 public class UserController {
 
+
     private final UserRepository userRepository;
 
     @Autowired
@@ -66,8 +67,12 @@ public class UserController {
 
 
     @GetMapping("/add_user")
-    public void adaUser() {
-        User user = new User("bartunio", "bartunio@gmail.com", "bartunio");
+    public void addUser() {
+        User user = new User("bartunio", "bartunio@gmail.com", "bart1234");
+        String salt = BCrypt.gensalt();
+        String hashedPassword = BCrypt.hashpw(user.getPassword(), salt);
+        user.setPassword(hashedPassword);
+        user.setSalt(salt);
         userRepository.save(user);
     }
 

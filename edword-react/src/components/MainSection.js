@@ -3,7 +3,6 @@ import video from '../videos/video2.mp4';
 import './styles/MainSection.css';
 import '../App.css';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
 
 
 

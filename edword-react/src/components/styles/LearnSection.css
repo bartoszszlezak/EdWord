@@ -22,14 +22,14 @@ video {
     border-radius: 15px;
     position: relative;  
     perspective: 1000px;
-    z-index: -1; 
+    /* z-index: -1;  */
   }
 
 
   
   .flashcard::before,
   .flashcard::after {
-        content: 'Siema';
+        content: 'Car';
         width: 100%;
         height: 100%;
         position: absolute;  
@@ -56,7 +56,7 @@ video {
       background: linear-gradient(60deg, rgba(0, 0, 0, 0.9) 15%, rgba(139, 139, 139, 0.7) 100%);  
       background-size: contain;
       transform: rotateY(180deg);
-      content: 'Elo';
+      content: 'Samochód';
   }
   
   .flashcard:hover::before {

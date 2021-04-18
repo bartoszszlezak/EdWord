@@ -1,8 +1,11 @@
 package com.example.edwordspring.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
+import java.util.Set;
 
 @Entity
 @Table(name = "users")
@@ -26,13 +29,18 @@ public class User implements Serializable {
     @NotEmpty
     private String salt;
 
-    public User(){}
+    @JsonIgnore
+    @OneToMany(mappedBy = "owner")
+    private Set<WordSet> sets;
+
 
     public User(String username, String email, String password) {
         this.username = username;
         this.email = email;
         this.password = password;
     }
+
+    public User(){}
 
     public Long getId() {
         return id;
@@ -83,4 +91,5 @@ public class User implements Serializable {
                 ", password='" + password + '\'' +
                 '}';
     }
+
 }
