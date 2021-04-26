@@ -35,7 +35,7 @@ function SignIn() {
         <div className='signin-section'>
             <video src={video} autoPlay loop muted />
             {(user.email !== "") ? (
-                <Link to='/learn'>
+                <Link to='/sets'>
                     <button className='button-welcome'>You are logged in!</button>
                 </Link>
             ) : (
