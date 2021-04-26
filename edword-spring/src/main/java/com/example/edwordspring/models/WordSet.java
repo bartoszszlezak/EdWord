@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
+import java.util.Optional;
 import java.util.Set;
 
 
@@ -17,10 +18,12 @@ public class WordSet implements Serializable {
     private Long id;
 
     @NotEmpty
-    private String name;
+    private String setName;
 
     @NotEmpty
     private String language;
+
+    private String photo;
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
@@ -35,9 +38,10 @@ public class WordSet implements Serializable {
     public WordSet() {
     }
 
-    public WordSet(@NotEmpty String name, @NotEmpty String language, User owner) {
-        this.name = name;
+    public WordSet(@NotEmpty String setName, @NotEmpty String language, String photo, User owner) {
+        this.setName = setName;
         this.language = language;
+        this.photo = photo;
         this.owner = owner;
     }
 
@@ -49,12 +53,12 @@ public class WordSet implements Serializable {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getSetName() {
+        return setName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setSetName(String setName) {
+        this.setName = setName;
     }
 
     public String getLanguage() {
@@ -73,7 +77,26 @@ public class WordSet implements Serializable {
         this.owner = owner;
     }
 
-//    public Set<Word> getWords() {
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
+    }
+
+    @Override
+    public String toString() {
+        return "WordSet{" +
+                "id=" + id +
+                ", setName='" + setName + '\'' +
+                ", language='" + language + '\'' +
+                ", owner=" + owner +
+                ", words=" + words +
+                '}';
+    }
+
+    //    public Set<Word> getWords() {
 //        return words;
 //    }
 //
