@@ -37,16 +37,16 @@ public class WordController {
         user.setSalt(salt);
         userRepository.save(user);
 
-        WordSet trip = new WordSet("podróże", "angielski", user);
+        WordSet trip = new WordSet("podróże", "angielski", "beb" ,user);
         wordSetRepository.save(trip);
-        Word word = new Word("samochód", "car", trip);
-        Word word1 = new Word("drzwi", "door", trip);
+        Word word = new Word("samochód", "car", "learn", trip);
+        Word word1 = new Word("drzwi", "door", "learn", trip);
         wordRepository.save(word);
         wordRepository.save(word1);
 
-        WordSet house = new WordSet("dom", "angielski", user);
+        WordSet house = new WordSet("dom", "angielski", "bebe",user);
         wordSetRepository.save(house);
-        Word word2 = new Word("kuchnia", "kitchen", house);
+        Word word2 = new Word("kuchnia", "kitchen", "learn", house);
         wordRepository.save(word2);
     }
 

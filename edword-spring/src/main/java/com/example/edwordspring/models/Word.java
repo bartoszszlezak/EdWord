@@ -21,6 +21,9 @@ public class Word implements Serializable {
     @NotEmpty
     private String translation;
 
+    @NotEmpty
+    private String status;
+
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "wordSet_id")
@@ -28,9 +31,10 @@ public class Word implements Serializable {
 
     public Word() { }
 
-    public Word(@NotEmpty String content, @NotEmpty String translation, WordSet wordSet) {
+    public Word(@NotEmpty String content, @NotEmpty String translation, @NotEmpty String status, WordSet wordSet) {
         this.content = content;
         this.translation = translation;
+        this.status = status;
         this.wordSet = wordSet;
     }
 
@@ -64,5 +68,13 @@ public class Word implements Serializable {
 
     public void setWordSet(WordSet wordSet) {
         this.wordSet = wordSet;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }
