@@ -5,7 +5,7 @@ const api = axios.create({
   baseURL: `http://localhost:8080`
 })
 
-const Service = (submitForm, validate) => {
+const ServiceRegistration = (submitForm, validate) => {
   const [values, setValues] = useState({
     username: '',
     email: '',
@@ -22,7 +22,6 @@ const Service = (submitForm, validate) => {
       ...values,
       [name]: value
     });
-    //console.log(values);
   };
 
   const handleSubmit = e => {
@@ -39,8 +38,9 @@ const Service = (submitForm, validate) => {
         api.post("http://localhost:8080/registration", values)
             .then(response => {
                 if(response.data != null){
-                    console.log("wysyłam = " + values.username + " " + values.password + " " + values.email); 
+                  console.log("wysyłam")
                 }
+                
             });
 
         submitForm();
@@ -52,4 +52,4 @@ const Service = (submitForm, validate) => {
   return { handleChange, handleSubmit, values, errors };
 };
 
-export default Service;
+export default ServiceRegistration;

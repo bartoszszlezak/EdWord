@@ -8,6 +8,9 @@ import Learn from './components/views/Learn';
 import Revision from './components/views/Revision';
 import SignIn from './components/views/SignIn';
 import SignUp from './components/views/SignUp';
+import Sets from './components/views/Sets';
+import AddSet from './components/views/AddSet';
+import WordForm from './components/WordForm';
 
 function App() {
   return (
@@ -20,6 +23,9 @@ function App() {
               <Route path='/revision' component={Revision}/>
               <Route path='/signin' component={SignIn}/>
               <Route path='/signup' component={SignUp}/>
+              <Route path='/sets' component={Sets}/>
+              <Route path='/addset' component={AddSet}/>
+              <Route path='/addword' component={WordForm}/>
           </Switch>
           <Footer />
       </BrowserRouter>

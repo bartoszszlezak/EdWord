@@ -2,8 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import './styles/SignUpForm.css';
 import video from '../videos/video1.mp4';
-import Service from './Service';
-import validate from './validate';
+import Service from './ServiceRegistration';
+import validate from './validateRegistration';
 
 const SignUpForm = ({submitForm}) => {
 

@@ -27,12 +27,12 @@ return(
                         </Link>
                     </li>
                     <li className='nav-page'>
-                        <Link className='nav-page-link' to='/learn' onClick={mobileMenuOff}>
+                        <Link className='nav-page-link' to='/sets' onClick={mobileMenuOff}>
                             Learn
                         </Link>
                     </li>
                     <li className='nav-page'>
-                        <Link className='nav-page-link' to='/revision' onClick={mobileMenuOff}>
+                        <Link className='nav-page-link' to='/sets' onClick={mobileMenuOff}>
                             Revision
                         </Link>
                     </li>
