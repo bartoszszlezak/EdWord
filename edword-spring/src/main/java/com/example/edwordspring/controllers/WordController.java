@@ -27,28 +27,28 @@ public class WordController {
         this.wordSetRepository = wordSetRepository;
     }
 
-    @GetMapping(value = "/add_word")
-    public void addWord() {
-
-        User user = new User("bartunio", "bartunio@gmail.com", "bart1234");
-        String salt = BCrypt.gensalt();
-        String hashedPassword = BCrypt.hashpw(user.getPassword(), salt);
-        user.setPassword(hashedPassword);
-        user.setSalt(salt);
-        userRepository.save(user);
-
-        WordSet trip = new WordSet("podróże", "angielski", "beb" ,user);
-        wordSetRepository.save(trip);
-        Word word = new Word("samochód", "car", "learn", trip);
-        Word word1 = new Word("drzwi", "door", "learn", trip);
-        wordRepository.save(word);
-        wordRepository.save(word1);
-
-        WordSet house = new WordSet("dom", "angielski", "bebe",user);
-        wordSetRepository.save(house);
-        Word word2 = new Word("kuchnia", "kitchen", "learn", house);
-        wordRepository.save(word2);
-    }
+//    @GetMapping(value = "/add_word")
+//    public void addWord() {
+//
+//        User user = new User("bartunio", "bartunio@gmail.com", "bart1234");
+//        String salt = BCrypt.gensalt();
+//        String hashedPassword = BCrypt.hashpw(user.getPassword(), salt);
+//        user.setPassword(hashedPassword);
+//        user.setSalt(salt);
+//        userRepository.save(user);
+//
+//        WordSet trip = new WordSet("podróże", "angielski", "beb" ,user);
+//        wordSetRepository.save(trip);
+//        Word word = new Word("samochód", "car", "learn", trip);
+//        Word word1 = new Word("drzwi", "door", "learn", trip);
+//        wordRepository.save(word);
+//        wordRepository.save(word1);
+//
+//        WordSet house = new WordSet("dom", "angielski", "bebe",user);
+//        wordSetRepository.save(house);
+//        Word word2 = new Word("kuchnia", "kitchen", "learn", house);
+//        wordRepository.save(word2);
+//    }
 
     @GetMapping(value = "/words")
     public Iterable<Word> getWords(){

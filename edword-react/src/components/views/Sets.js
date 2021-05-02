@@ -1,4 +1,3 @@
-import React from 'react'
 import '../styles/Cards.css';
 import SetItem from '../SetItem';
 import pic1 from '../../images/pic1.jpg';
@@ -7,9 +6,27 @@ import pic3 from '../../images/pic3.jpg';
 import pic4 from '../../images/pic4.jpg';
 import pic5 from '../../images/pic5.jpg';
 import { Link } from 'react-router-dom';
+import React, {useEffect, useState} from 'react';
 
 
 function Sets() {
+
+
+    const [photo, setPhoto] = useState('');
+
+    useEffect(() => {
+
+                    fetch('http://localhost:8080/wordset/image/1')
+                        .then(response => {
+                            response.blob().then(blob => {
+                                let image = window.URL.createObjectURL(blob);
+                                console.log(image);
+                                setPhoto(image);
+                            })
+                        })
+            
+    }, []);
+
     return (
         <div className='sets'>
         <div className="sets_header_container">
@@ -37,7 +54,7 @@ function Sets() {
                 </ul>
                 <ul className='sets_items'>
                     <SetItem
-                        src={pic3}
+                        src={photo}
                         text='Travel around our planet'
                         label='Travel'
                         path='/learn'
