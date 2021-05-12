@@ -10,7 +10,7 @@ import SignIn from './components/views/SignIn';
 import SignUp from './components/views/SignUp';
 import Sets from './components/views/Sets';
 import AddSet from './components/views/AddSet';
-import WordForm from './components/WordForm';
+import AddWord from './components/views/AddWord';
 
 function App() {
   return (
@@ -25,7 +25,7 @@ function App() {
               <Route path='/signup' component={SignUp}/>
               <Route path='/sets' component={Sets}/>
               <Route path='/addset' component={AddSet}/>
-              <Route path='/addword' component={WordForm}/>
+              <Route path='/addword' component={AddWord}/>
           </Switch>
           <Footer />
       </BrowserRouter>

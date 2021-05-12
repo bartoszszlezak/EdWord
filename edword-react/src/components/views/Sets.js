@@ -1,4 +1,3 @@
-import React from 'react'
 import '../styles/Cards.css';
 import SetItem from '../SetItem';
 import pic1 from '../../images/pic1.jpg';
@@ -7,9 +6,40 @@ import pic3 from '../../images/pic3.jpg';
 import pic4 from '../../images/pic4.jpg';
 import pic5 from '../../images/pic5.jpg';
 import { Link } from 'react-router-dom';
+import React, {useEffect, useState} from 'react';
+import axios from "axios";
 
+const api = axios.create({
+    baseURL: `http://localhost:8080/wordsets`
+})
 
 function Sets() {
+
+
+    const [sets, setSets] = useState([]);
+    const [status, setStatus] = useState(false);
+
+    useEffect(() => {
+        api.get('/')
+            .then(response => {
+                Promise.all(response.data.map(num =>
+                    api.get('http://localhost:8080//wordset/image/' + num.id)
+                        .then(resp => resp.data)
+                        .then(data => {
+                            return {num, data};
+                        }))
+                ).then(v => {
+                        v.map(k => k.num.setImage = k.data)
+
+                        setSets(response.data);
+                        setStatus(true);
+                    }
+                );
+
+            })
+
+    }, []);
+
     return (
         <div className='sets'>
         <div className="sets_header_container">
@@ -21,7 +51,22 @@ function Sets() {
         
         <div className='sets_container'>
             <div className='sets_wrapper'>
+
                 <ul className='sets_items'>
+
+                    {sets.map(set => (
+                        <SetItem
+                            key = {set.id}
+                            src={set.setImage}
+                            text={set.setName}
+                            label={set.language}
+                            path='/learn'
+                        />
+                    ))}
+
+                   
+                </ul>
+                {/* <ul className='sets_items'>
                     <SetItem
                         src={pic1}
                         text='Learn types of animals'
@@ -54,7 +99,7 @@ function Sets() {
                         label='City'
                         path='/learn'
                     />
-                </ul>
+                </ul> */}
             </div>
         </div>
         </div>

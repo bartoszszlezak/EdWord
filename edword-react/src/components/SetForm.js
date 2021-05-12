@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './styles/SignUpForm.css';
 import video from '../videos/video1.mp4';
 import Service from './ServiceSet';
@@ -7,7 +7,8 @@ import validate from './validateSet';
 
 const SetForm = ({submitForm}) => {
 
-    const {handleChange, handleSubmit, values, errors} = Service(submitForm, validate);
+    const {handleChange, handleSubmit, changeFile, values, errors} = Service(submitForm, validate);
+        
 
     return (
         <div className='signup-section'>
@@ -44,12 +45,11 @@ const SetForm = ({submitForm}) => {
                 <div className='signup-inputs'>
                     <input
                         id='photo' 
-                        type='text'
+                        type='file'
                         name='photo'
                         className='form-input'
                         placeholder='Enter set photo'
-                        value={values.photo}
-                        onChange={handleChange}
+                        onChange={changeFile}
                     />
                     {errors.photo && <p>{errors.photo}</p>}      
                 </div>

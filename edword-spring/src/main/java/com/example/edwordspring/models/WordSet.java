@@ -23,7 +23,6 @@ public class WordSet implements Serializable {
     @NotEmpty
     private String language;
 
-    private String photo;
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
@@ -34,6 +33,10 @@ public class WordSet implements Serializable {
     @OneToMany(mappedBy = "wordSet", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Word> words;
 
+    @JsonIgnore
+    @Lob
+    private String setImage;
+
 
     public WordSet() {
     }
@@ -41,7 +44,7 @@ public class WordSet implements Serializable {
     public WordSet(@NotEmpty String setName, @NotEmpty String language, String photo, User owner) {
         this.setName = setName;
         this.language = language;
-        this.photo = photo;
+        this.setImage = photo;
         this.owner = owner;
     }
 
@@ -77,12 +80,20 @@ public class WordSet implements Serializable {
         this.owner = owner;
     }
 
-    public String getPhoto() {
-        return photo;
+    public Set<Word> getWords() {
+        return words;
     }
 
-    public void setPhoto(String photo) {
-        this.photo = photo;
+    public void setWords(Set<Word> words) {
+        this.words = words;
+    }
+
+    public String getSetImage() {
+        return setImage;
+    }
+
+    public void setSetImage(String setImage) {
+        this.setImage = setImage;
     }
 
     @Override
@@ -93,14 +104,9 @@ public class WordSet implements Serializable {
                 ", language='" + language + '\'' +
                 ", owner=" + owner +
                 ", words=" + words +
+                ", setImage=" + setImage +
                 '}';
     }
 
-    //    public Set<Word> getWords() {
-//        return words;
-//    }
-//
-//    public void setWords(Set<Word> words) {
-//        this.words = words;
-//    }
+
 }

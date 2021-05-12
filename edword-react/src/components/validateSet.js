@@ -5,10 +5,6 @@ export default function validate(values) {
       errors.setName = 'Name required';
     }
 
-    if (!values.photo.trim()) {
-      errors.photo = 'Photo required';
-    }
-
     if (!values.language.trim()) {
       errors.language = 'Language required';
     }
