@@ -7,24 +7,37 @@ import pic4 from '../../images/pic4.jpg';
 import pic5 from '../../images/pic5.jpg';
 import { Link } from 'react-router-dom';
 import React, {useEffect, useState} from 'react';
+import axios from "axios";
 
+const api = axios.create({
+    baseURL: `http://localhost:8080/wordsets`
+})
 
 function Sets() {
 
 
-    const [photo, setPhoto] = useState('');
+    const [sets, setSets] = useState([]);
+    const [status, setStatus] = useState(false);
 
     useEffect(() => {
+        api.get('/')
+            .then(response => {
+                Promise.all(response.data.map(num =>
+                    api.get('http://localhost:8080//wordset/image/' + num.id)
+                        .then(resp => resp.data)
+                        .then(data => {
+                            return {num, data};
+                        }))
+                ).then(v => {
+                        v.map(k => k.num.setImage = k.data)
 
-                    fetch('http://localhost:8080/wordset/image/1')
-                        .then(response => {
-                            response.blob().then(blob => {
-                                let image = window.URL.createObjectURL(blob);
-                                console.log(image);
-                                setPhoto(image);
-                            })
-                        })
-            
+                        setSets(response.data);
+                        setStatus(true);
+                    }
+                );
+
+            })
+
     }, []);
 
     return (
@@ -38,7 +51,22 @@ function Sets() {
         
         <div className='sets_container'>
             <div className='sets_wrapper'>
+
                 <ul className='sets_items'>
+
+                    {sets.map(set => (
+                        <SetItem
+                            key = {set.id}
+                            src={set.setImage}
+                            text={set.setName}
+                            label={set.language}
+                            path='/learn'
+                        />
+                    ))}
+
+                   
+                </ul>
+                {/* <ul className='sets_items'>
                     <SetItem
                         src={pic1}
                         text='Learn types of animals'
@@ -54,7 +82,7 @@ function Sets() {
                 </ul>
                 <ul className='sets_items'>
                     <SetItem
-                        src={photo}
+                        src={pic3}
                         text='Travel around our planet'
                         label='Travel'
                         path='/learn'
@@ -71,7 +99,7 @@ function Sets() {
                         label='City'
                         path='/learn'
                     />
-                </ul>
+                </ul> */}
             </div>
         </div>
         </div>

@@ -30,10 +30,12 @@
   .sets_wrapper {
     position: relative;
     margin: 50px 0 45px;
+    width: 80vw;
   }
   
   .sets_items {
     margin-bottom: 24px;
+    width: 100%;
   }
   
   .set_item {

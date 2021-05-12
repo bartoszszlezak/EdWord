@@ -7,7 +7,7 @@ import validate from './validateSet';
 
 const SetForm = ({submitForm}) => {
 
-    const {handleChange, handleSubmit, setFile, values, errors} = Service(submitForm, validate);
+    const {handleChange, handleSubmit, changeFile, values, errors} = Service(submitForm, validate);
         
 
     return (
@@ -49,8 +49,7 @@ const SetForm = ({submitForm}) => {
                         name='photo'
                         className='form-input'
                         placeholder='Enter set photo'
-                        // value={values.photo}
-                        onChange={e => setFile(e.target.files[0])}
+                        onChange={changeFile}
                     />
                     {errors.photo && <p>{errors.photo}</p>}      
                 </div>

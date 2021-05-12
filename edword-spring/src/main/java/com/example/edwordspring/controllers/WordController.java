@@ -6,11 +6,12 @@ import com.example.edwordspring.models.WordSet;
 import com.example.edwordspring.repository.UserRepository;
 import com.example.edwordspring.repository.WordRepository;
 import com.example.edwordspring.repository.WordSetRepository;
+import com.fasterxml.jackson.databind.JsonNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCrypt;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
@@ -53,5 +54,19 @@ public class WordController {
     @GetMapping(value = "/words")
     public Iterable<Word> getWords(){
         return wordRepository.findAll();
+    }
+
+    @PostMapping(value = "/addword")
+    public void addWord(@RequestBody ArrayList<JsonNode> data){
+
+        data.forEach(jsonNode -> {
+            Long id = jsonNode.get("setId").asLong();
+            String content = jsonNode.get("word").asText();
+            String translation = jsonNode.get("translation").asText();
+            WordSet wordSet = wordSetRepository.findById(id).orElse(null);
+            Word word = new Word(content, translation, "learn", wordSet);
+            wordRepository.save(word);
+        });
+
     }
 }

@@ -34,15 +34,14 @@ public class WordSet implements Serializable {
     private Set<Word> words;
 
     @JsonIgnore
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "setimage_id", referencedColumnName = "id")
-    private SetImage setImage;
+    @Lob
+    private String setImage;
 
 
     public WordSet() {
     }
 
-    public WordSet(@NotEmpty String setName, @NotEmpty String language, SetImage photo, User owner) {
+    public WordSet(@NotEmpty String setName, @NotEmpty String language, String photo, User owner) {
         this.setName = setName;
         this.language = language;
         this.setImage = photo;
@@ -81,11 +80,19 @@ public class WordSet implements Serializable {
         this.owner = owner;
     }
 
-    public SetImage getSetImage() {
+    public Set<Word> getWords() {
+        return words;
+    }
+
+    public void setWords(Set<Word> words) {
+        this.words = words;
+    }
+
+    public String getSetImage() {
         return setImage;
     }
 
-    public void setSetImage(SetImage setImage) {
+    public void setSetImage(String setImage) {
         this.setImage = setImage;
     }
 
