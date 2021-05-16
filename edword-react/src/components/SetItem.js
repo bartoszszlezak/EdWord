@@ -2,6 +2,7 @@ import React from 'react'
 import {Link} from 'react-router-dom'
 
 function SetItem(props) {
+
     return (
         <>
             <li className='set_item'>

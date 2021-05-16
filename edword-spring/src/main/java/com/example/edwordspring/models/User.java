@@ -29,6 +29,8 @@ public class User implements Serializable {
     @NotEmpty
     private String salt;
 
+    private String role;
+
     @JsonIgnore
     @OneToMany(mappedBy = "owner")
     private Set<WordSet> sets;
@@ -81,6 +83,15 @@ public class User implements Serializable {
     public void setSalt(String salt) {
         this.salt = salt;
     }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
 
     @Override
     public String toString() {

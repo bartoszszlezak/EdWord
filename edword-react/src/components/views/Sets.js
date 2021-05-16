@@ -23,7 +23,7 @@ function Sets() {
         api.get('/')
             .then(response => {
                 Promise.all(response.data.map(num =>
-                    api.get('http://localhost:8080//wordset/image/' + num.id)
+                    api.get('http://localhost:8080/wordset/image/' + num.id)
                         .then(resp => resp.data)
                         .then(data => {
                             return {num, data};

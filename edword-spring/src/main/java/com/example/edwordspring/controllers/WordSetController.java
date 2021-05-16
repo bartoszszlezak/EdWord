@@ -21,7 +21,7 @@ import java.net.URI;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
-public class WordSetController<File> {
+public class WordSetController {
 
 
     private final WordSetRepository wordSetRepository;
