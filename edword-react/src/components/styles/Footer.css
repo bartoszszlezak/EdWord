@@ -2,6 +2,8 @@
     width: 100%;
     position: sticky;
     background: linear-gradient(60deg, #111111 15%, #7a7a7a 100%);
+    padding: 0;
+    min-height: 20vh;
 }
 
 .footer-informations{

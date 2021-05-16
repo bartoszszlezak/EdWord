@@ -52,13 +52,18 @@ return(
                         </Link>
                     </li>
                     <li className='nav-page'>
-                        <Link className='nav-page-link' to='/sets' onClick={mobileMenuOff}>
+                        <Link className='nav-page-link' to='/learn' onClick={mobileMenuOff}>
                             Learn
                         </Link>
                     </li>
                     <li className='nav-page'>
-                        <Link className='nav-page-link' to='/sets' onClick={mobileMenuOff}>
+                        <Link className='nav-page-link' to='/revision' onClick={mobileMenuOff}>
                             Revision
+                        </Link>
+                    </li>
+                    <li className='nav-page'>
+                        <Link className='nav-page-link' to='/sets' onClick={mobileMenuOff}>
+                            Sets
                         </Link>
                     </li>
                     {(auth.login) ? (

@@ -1,12 +1,14 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
+import Learn from '../components/views/Learn'
 
 function SetItem(props) {
 
+
     return (
         <>
-            <li className='set_item'>
-                <Link className='set_item_link' to={props.path}>
+            <li className='set_item' onClick={() => props.handleClick(props.id, props.type)}>
+                <div className='set_item_link'>
                     <figure className='set_item_wraper' data-category={props.label}>
                         <img
                             className='set_item_img'
@@ -17,7 +19,7 @@ function SetItem(props) {
                     <div className='set_item_info'>
                         <h5 className='set_item_text'>{props.text}</h5>
                     </div>
-                </Link>
+                </div>
             </li>
         </>
     );
