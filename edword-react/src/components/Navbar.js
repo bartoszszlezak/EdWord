@@ -1,12 +1,37 @@
 import React, {useState} from "react";
 import './styles/Navbar.css';
-import {Link} from "react-router-dom";
+import {Link, useHistory} from "react-router-dom";
+import { useDispatch, useSelector } from 'react-redux';
+import { signout } from "../authorisation/LoginAuth";
+
+
 
 function Navbar(){
 
+
+    
     const [clicked, setClicked] = useState(false);
-    const mobileMenuOff = () => setClicked(false);
+    const mobileMenuOff = () => {
+        setClicked(false);
+    }
+    
     const changeClicked = () => setClicked(!clicked);
+    const dispatch = useDispatch();
+    const history = useHistory();
+    const auth = useSelector(state => state.auth);
+
+    const handleLogout = () => {
+
+        
+        dispatch(signout()).then(() => {
+            history.replace('/');
+        })
+        if(!auth.login){
+            setClicked(false);
+        }
+    }
+
+    
 
     
 return(
@@ -36,18 +61,34 @@ return(
                             Revision
                         </Link>
                     </li>
-                    <li className='nav-page'>
-                        <Link className='nav-page-link-mobile' to='/signin' onClick={mobileMenuOff}>
-                            Sign In
-                        </Link>
-                    </li>
+                    {(auth.login) ? (
+                        <li className='nav-page'>
+                            <Link className='nav-page-link-mobile' to='/' onClick={handleLogout}>
+                                Sign out
+                            </Link>
+                        </li>
+                    ) : (
+                        <li className='nav-page'>
+                            <Link className='nav-page-link-mobile' to='/signin' onClick={mobileMenuOff}>
+                                Sign in
+                            </Link>
+                        </li>
+                    )}
                 </ul>
+                {(auth.login) ? (
+                    <Link to='/' className='navbar-but'>
+                        <button className='navbar-button' onClick={handleLogout}>
+                            Sign out
+                        </button>
+                    </Link>
+                ) : (
+                    <Link to='/signin' className='navbar-but'>
+                        <button className='navbar-button'>
+                            Sign in
+                        </button>
+                    </Link>
+                )}
                 
-                <Link to='/signin' className='navbar-but'>
-                    <button className='navbar-button'>
-                        Sign In
-                    </button>
-                </Link>
                     
             </div>
           </nav>
