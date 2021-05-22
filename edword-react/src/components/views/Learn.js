@@ -1,7 +1,6 @@
 import LearnSection from '../LearnSection';
 import '../styles/Cards.css';
 import SetItem from '../SetItem';
-import { Link } from 'react-router-dom';
 import React, {useEffect, useState} from 'react';
 import axios from "axios";
 

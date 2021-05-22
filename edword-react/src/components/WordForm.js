@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import './styles/SignUpForm.css';
-import video from '../videos/video1.mp4';
+import './styles/WordForm.css';
+// import video from '../videos/video1.mp4';
 import Service from './ServiceWord';
 import validate from './validateWord';
 
@@ -26,16 +26,16 @@ const WordForm = ({submitForm}) => {
         
 
     return (
-        <div className='signup-section'>
-            <video src={video} autoPlay loop muted />
+        <div className='wordform-section'>
+            {/* <video src={video} autoPlay loop muted /> */}
             <h1>Add Words</h1>
-            <div className="setform-container">
-                <form className='sign-up-form' onSubmit={handleClick}>
+            <div className="wordform-container">
+                <form className='wordform-form' onSubmit={handleClick}>
 
-                <div className='signup-inputs'>
+                <div className='word-inputs'>
                     <input
                         id='word'
-                        className='form-input'
+                        className='form-input-word'
                         type='text'
                         name='word'
                         placeholder='Enter word'
@@ -45,12 +45,12 @@ const WordForm = ({submitForm}) => {
                     {errors.word && <p>{errors.word}</p>}
                 </div>
 
-                <div className='signup-inputs'>
+                <div className='word-inputs'>
                     <input
                         id='translation' 
                         type='text'
                         name='translation'
-                        className='form-input'
+                        className='form-input-word'
                         placeholder='Enter translation'
                         value={values.translation}
                         onChange={handleChange}
@@ -61,19 +61,16 @@ const WordForm = ({submitForm}) => {
                     Add
                 </button>
             </form>
-            <button className='button-accept' onClick = {handleSubmit}>
+            <button className='button-confirm' onClick = {handleSubmit}>
                     Confirm
             </button> 
             </div>
 
-            <div>
+            <div className='words-list'>
                 {words.map(w => (
-                    <div key={w.word}>
-                        <p>
-                            Słowo: {w.word}
-                        </p>
-                        <p>
-                            Tłumacznie: {w.translation}
+                    <div key={w.word} className='word-wrapper'>
+                        <p className='word-list-element'>
+                            {w.word} <i class="fas fa-arrow-alt-circle-right"></i> {w.translation}
                         </p>
                     </div>
                 ))}
