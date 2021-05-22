@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import SetForm from '../SetForm';
 import { Link } from 'react-router-dom';
-import video from '../../videos/video4.mp4';
+// import video from '../../videos/video4.mp4';
 import '../../App.css';
 
 
@@ -19,7 +19,7 @@ function AddSet() {
             <SetForm submitForm={submitSetForm} />
             ) : (
                 <div className='succes-signup'>
-                    <video src={video} autoPlay loop muted />
+                    {/* <video src={video} autoPlay loop muted /> */}
                     <Link to='/addword'>
                         <button>Your set was created succesfully</button>
                     </Link>
