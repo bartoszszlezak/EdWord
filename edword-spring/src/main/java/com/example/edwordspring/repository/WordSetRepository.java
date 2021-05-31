@@ -5,8 +5,11 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
+import javax.transaction.Transactional;
+
 @Repository
 public interface WordSetRepository extends CrudRepository<WordSet, Long> {
-    @Query(value = "SELECT * FROM set s WHERE s.owner_id=?1", nativeQuery = true)
-    WordSet getWordSetByUserId(Long id);
+    @Transactional
+    @Query(value = "SELECT * FROM wordsets WHERE owner_id=?1", nativeQuery = true)
+    Iterable<WordSet> getWordSetByUserId(Long id);
 }

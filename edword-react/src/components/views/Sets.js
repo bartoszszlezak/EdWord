@@ -1,8 +1,11 @@
 import '../styles/Cards.css';
 import SetItem from '../SetItem';
-import { Link } from 'react-router-dom';
+import {Link, useHistory} from 'react-router-dom';
 import React, {useEffect, useState} from 'react';
 import axios from "axios";
+import {useSelector} from "react-redux";
+import SetElements from "../SetElements";
+
 
 const api = axios.create({
     baseURL: `http://localhost:8080/wordsets`
@@ -11,13 +14,16 @@ const api = axios.create({
 function Sets() {
 
     const [clicked, setClicked] = useState(false);
-
     const[setId, setSetId] = useState(0);
     const[type, setType] = useState("");
+    const[setName, setSetName] = useState("");
+    const history = useHistory();
+    const auth = useSelector(state => state.auth);
 
-    const listWords = (setId, type) => {
+    const listWords = (setId, type, setName) => {
         setType(type);
         setSetId(setId);
+        setSetName(setName);
         setClicked(true);
     }
 
@@ -26,24 +32,37 @@ function Sets() {
     const [sets, setSets] = useState([]);
     const [status, setStatus] = useState(false);
 
+
     useEffect(() => {
-        api.get('/')
-            .then(response => {
-                Promise.all(response.data.map(num =>
-                    api.get('http://localhost:8080/wordset/image/' + num.id)
-                        .then(resp => resp.data)
-                        .then(data => {
-                            return {num, data};
-                        }))
-                ).then(v => {
-                        v.map(k => k.num.setImage = k.data)
+        if(!auth.login){
+            history.push("/");
+        }
+        else{
+            const config = {
+                headers: {
+                    "Authorization": "Bearer " + localStorage.getItem('token')
+                }
+            };
+            const user_id = auth.auth.first;
+            api.get('/' + user_id, config)
+                .then(response => {
+                    Promise.all(response.data.map(num =>
+                        api.get('http://localhost:8080/wordset/image/' + num.id, config)
+                            .then(resp => resp.data)
+                            .then(data => {
+                                return {num, data};
+                            }))
+                    ).then(v => {
+                            v.map(k => k.num.setImage = k.data)
 
-                        setSets(response.data);
-                        setStatus(true);
-                    }
-                );
+                            setSets(response.data);
+                            setStatus(true);
+                        }
+                    );
 
-            })
+                })
+        }
+
 
     }, []);
 
@@ -83,12 +102,8 @@ function Sets() {
             </div>
             </div>
         ) : (
-            <div>
-                Lista słów
-                {
-                    setId + " " + type
-                }
-
+            <div className="wordset-words-list">
+                <SetElements setName={setName} setId={setId} setType={type}/>
                 <button onClick = {() => setClicked(false)} >
                     Back
                 </button>

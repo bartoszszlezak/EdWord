@@ -1,8 +1,10 @@
 package com.example.edwordspring.controllers;
 
 import com.example.edwordspring.models.User;
+import com.example.edwordspring.models.Word;
 import com.example.edwordspring.models.WordSet;
 import com.example.edwordspring.repository.UserRepository;
+import com.example.edwordspring.repository.WordRepository;
 import com.example.edwordspring.repository.WordSetRepository;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.sun.istack.NotNull;
@@ -17,6 +19,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.io.IOException;
 import java.net.URI;
+import java.util.Collections;
 
 
 @RestController
@@ -26,32 +29,30 @@ public class WordSetController {
 
     private final WordSetRepository wordSetRepository;
     private final UserRepository userRepository;
+    private final WordRepository wordRepository;
+
 
     @Autowired
-    public WordSetController(WordSetRepository wordSetRepository, UserRepository userRepository) {
+    public WordSetController(WordSetRepository wordSetRepository, UserRepository userRepository, WordRepository wordRepository) {
         this.wordSetRepository = wordSetRepository;
         this.userRepository = userRepository;
+        this.wordRepository = wordRepository;
     }
 
-    @GetMapping(value = "/wordsets")
-    public Iterable<WordSet> getWordSets(){
-        return wordSetRepository.findAll();
+
+
+
+
+
+
+    @GetMapping(value = "/wordsets/{id}")
+    public Iterable<WordSet> getWordSets(@PathVariable("id") Long id){
+        return wordSetRepository.getWordSetByUserId(id);
     }
 
-//    @GetMapping(value = "/add_wordsets")
-//    public void addWordSet() {
-//        User user = new User("bartunio", "bartunio@gmail.com", "bart1234");
-//        String salt = BCrypt.gensalt();
-//        String hashedPassword = BCrypt.hashpw(user.getPassword(), salt);
-//        user.setPassword(hashedPassword);
-//        user.setSalt(salt);
-//        userRepository.save(user);
-//        WordSet wordSet = new WordSet("trip", "angielski", "ebe" ,user);
-//        wordSetRepository.save(wordSet);
-//    }
 
     @PostMapping(value = "/addset")
-    public void createSet(@RequestBody JsonNode wordSet){
+    public Long createSet(@RequestBody JsonNode wordSet){
 
         Long id = wordSet.get("userId").asLong();
         User user = userRepository.findById(id).orElse(null);
@@ -62,6 +63,7 @@ public class WordSetController {
                 user
         );
         wordSetRepository.save(wordSet1);
+        return wordSet1.getId();
     }
 
 
@@ -72,4 +74,12 @@ public class WordSetController {
         assert wordSet != null;
         return wordSet.getSetImage();
     }
+
+    @GetMapping(value = "/wordset/words/{id}")
+    public Iterable<Word> getWordSetWords(@PathVariable("id") Long id){
+
+        return wordRepository.getWordsBySetId(id);
+    }
+
+
 }

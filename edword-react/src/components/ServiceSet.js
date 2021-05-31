@@ -1,18 +1,23 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import {useSelector} from "react-redux";
+import ServiceSetId from "./ServiceSetId";
+
 
 const api = axios.create({
   baseURL: `http://localhost:8080`
 })
 
 
-
 const ServiceSet = (submitForm, validate) => {
+
+  const {setSetId, getId} = ServiceSetId();
+  const user = useSelector(state => state.auth.auth.first)
   const [values, setValues] = useState({
     setName: '',
     language: '',
     setImage: '',
-    userId: 1
+    userId: user
   });
 
   let file = '';
@@ -48,20 +53,22 @@ const ServiceSet = (submitForm, validate) => {
     setValues({...values,setImage: base64String})
 
 }
-
-
-
   const sendData = () => {
 
-    api.post(`http://localhost:8080/addset`, values)
+      const config = {
+          headers: {
+              "Authorization": "Bearer " + localStorage.getItem('token')
+          }
+      };
+    api.post(`http://localhost:8080/addset`, values, config)
         .then(r => {
-            console.log("Wysłane danych");
             console.log(values);
+            setSetId(r.data);
             setValues({
                 setName: '',
                 language: '',
                 setImage: '',
-                userId: 1
+                userId: user
             });
         });
 }
@@ -77,7 +84,7 @@ const ServiceSet = (submitForm, validate) => {
     [errors, isSubmitting]
   );
 
-  return { handleChange, handleSubmit, changeFile, values, errors };
+  return { handleChange, handleSubmit, changeFile, values, errors};
 };
 
 export default ServiceSet;

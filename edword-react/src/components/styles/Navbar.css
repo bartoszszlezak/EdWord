@@ -28,6 +28,12 @@
     align-items: center;
 }
 
+
+.nav-page > p{
+    font-size: 20px;
+    margin: 0 50px;
+}
+
 .fa-book-reader{
     margin-left: 0.5rem;
     font-size: 2rem;
@@ -35,7 +41,7 @@
 
 .menu-desktop{
     display: grid;
-    grid-template-columns: repeat(5, auto);
+    grid-template-columns: repeat(6, auto);
     grid-gap: 10px;
     list-style: none;
     text-align: center;
@@ -97,7 +103,7 @@
 }
 
 
-@media screen and (max-width: 840px) {
+@media screen and (max-width: 1024px) {
 
     .NavbarItems {
         position: relative;

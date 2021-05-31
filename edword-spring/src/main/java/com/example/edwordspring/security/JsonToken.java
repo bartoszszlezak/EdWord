@@ -23,7 +23,7 @@ public class JsonToken {
                 .claim("role", user.getRole())
                 .claim("name", name)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis()+60000))
+                .setExpiration(new Date(System.currentTimeMillis()+3600000))
                 .signWith(SignatureAlgorithm.HS512, signingKey)
                 .compact();
     }

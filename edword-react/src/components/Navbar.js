@@ -1,9 +1,10 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import './styles/Navbar.css';
 import {Link, useHistory} from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 import { signout } from "../authorisation/LoginAuth";
-
+import jwt_decode from "jwt-decode";
+import Notification from "./Notification";
 
 
 function Navbar(){
@@ -31,6 +32,18 @@ function Navbar(){
         }
     }
 
+    const [info, setInfo] = useState({role: "NULL", name: "NULL"})
+    const [status, setStatus] = useState(false);
+
+    useEffect(() => {
+        if (auth.login) {
+            const token= auth.user.second;
+            setInfo(jwt_decode(token)) ;
+            setStatus(true);
+            console.log(info);
+        }
+    }, [status]);
+
     
 
     
@@ -46,6 +59,11 @@ return(
                 </div>
 
               <ul className={clicked ? 'menu-desktop active' : 'menu-desktop'}>
+                    <li className='nav-page'>
+                          {(info.name !== "NULL") ? (
+                              <Link className='nav-page-link'>{info.name}</Link>
+                          ) : null}
+                    </li>
                     <li className='nav-page'>
                         <Link className='nav-page-link' to='/' onClick={mobileMenuOff}>
                             Home
@@ -93,8 +111,8 @@ return(
                         </button>
                     </Link>
                 )}
-                
-                    
+
+            <Notification/>
             </div>
           </nav>
       </>
