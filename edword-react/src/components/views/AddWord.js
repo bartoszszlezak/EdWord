@@ -7,7 +7,6 @@ import '../../App.css';
 function AddWord() {
 
     const [isWordSubmitted, setIsWordSubmitted] = useState(false);
-
     function submitWordForm() {
       setIsWordSubmitted(true);
     }
@@ -15,7 +14,7 @@ function AddWord() {
     return (
         <>
             {!isWordSubmitted ? (
-            <WordForm submitForm={submitWordForm} />
+            <WordForm submitForm={submitWordForm}/>
             ) : (
                 <div className='succes-signup'>
                     {/* <video src={video} autoPlay loop muted /> */}

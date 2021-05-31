@@ -117,6 +117,30 @@
     font-size: 18px;
     line-height: 24px;
   }
+
+  .wordset-words-list{
+      min-height:95vh;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+  }
+
+  .words_container{
+      display: flex;
+      flex-direction: column;
+      width: 95vw;
+      height: 50vh;
+      align-items: center;
+      justify-content: center;
+  }
+
+  .set_name{
+      color: black;
+      font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+      margin-bottom: 20px;
+  }
   
   @media only screen and (min-width: 1200px) {
     .content__blog__container {

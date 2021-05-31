@@ -1,18 +1,20 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+// import {handleSetId} from "./ServiceSet";
+import ServiceSetId from "./ServiceSetId";
 
 const api = axios.create({
   baseURL: `http://localhost:8080`
 })
 
-
-
 const ServiceWord = (submitForm, validate) => {
+
+  const {setSetId, getId} = ServiceSetId();
 
   const [values, setValues] = useState({
     word: '',
     translation: '',
-    setId: 1
+    setId: getId()
   });
 
   const [words, setWords] = useState([]);
@@ -45,7 +47,12 @@ const ServiceWord = (submitForm, validate) => {
 
   const sendData = () => {
 
-    api.post(`http://localhost:8080/addword`, words)
+    const config = {
+      headers: {
+        "Authorization": "Bearer " + localStorage.getItem('token')
+      }
+    };
+    api.post(`http://localhost:8080/addword`, words, config)
         .then(r => {
             console.log("Wysłano słowa");
         });
@@ -54,12 +61,12 @@ const ServiceWord = (submitForm, validate) => {
 
   useEffect(
     () => {
-      if (Object.keys(errors).length === 0 && isSubmitting) {
 
+      if (Object.keys(errors).length === 0 && isSubmitting) {
         setValues({
           word: '',
           translation: '',
-          setId: 1
+          setId: getId()
         })
         setIsSubmitting(false);
       }

@@ -2,7 +2,7 @@ import React from 'react';
 import './styles/LearnSection.css';
 import video from '../videos/video5.mp4';
 
-function LearnSection({setClicked}) {
+function LearnSection(props) {
 
 
 
@@ -10,6 +10,9 @@ function LearnSection({setClicked}) {
         
         <div className='learn-section'>
             <video src={video} autoPlay loop muted />
+            {
+                props.setName + " " + props.setId + props.type
+            }
             <div className='flashcard' />
             <div className='buttons-learn'>
                 <button>
@@ -18,7 +21,7 @@ function LearnSection({setClicked}) {
                 <button>
                     Done
                 </button>
-                <button onClick = {() => setClicked(false)} >
+                <button onClick = {() => props.setClicked(false)} >
                     Back
                 </button>
             </div>

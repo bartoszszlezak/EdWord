@@ -3,6 +3,10 @@ import '../styles/Cards.css';
 import SetItem from '../SetItem';
 import React, {useEffect, useState} from 'react';
 import axios from "axios";
+import {useSelector} from "react-redux";
+import {useHistory} from "react-router-dom";
+import video from "../../videos/video5.mp4";
+import RevisionSection from "../RevisionSection";
 
 const api = axios.create({
     baseURL: `http://localhost:8080/wordsets`
@@ -10,33 +14,53 @@ const api = axios.create({
 
 function Learn() {
 
+    const auth = useSelector(state => state.auth);
+    const history = useHistory();
     const [sets, setSets] = useState([]);
     const [status, setStatus] = useState(false);
+    const[setId, setSetId] = useState(0);
+    const[type, setType] = useState("");
+    const[setName, setSetName] = useState("");
 
     const [clicked, setClicked] = useState(false)
 
-    const setParam = (setId, type) => {
+    const handleClick = (setId, type, setName) => {
+        setType(type);
+        setSetId(setId);
+        setSetName(setName);
         setClicked(true);
     }
 
     useEffect(() => {
-        api.get('/')
-            .then(response => {
-                Promise.all(response.data.map(num =>
-                    api.get('http://localhost:8080/wordset/image/' + num.id)
-                        .then(resp => resp.data)
-                        .then(data => {
-                            return {num, data};
-                        }))
-                ).then(v => {
-                        v.map(k => k.num.setImage = k.data)
+        if(!auth.login){
+            history.push("/");
+        }
+        else {
+            const config = {
+                headers: {
+                    "Authorization": "Bearer " + localStorage.getItem('token')
+                }
+            };
+            const user_id = auth.auth.first;
+            api.get('/' + user_id, config)
+                .then(response => {
+                    Promise.all(response.data.map(num =>
+                        api.get('http://localhost:8080/wordset/image/' + num.id, config)
+                            .then(resp => resp.data)
+                            .then(data => {
+                                return {num, data};
+                            }))
+                    ).then(v => {
+                            v.map(k => k.num.setImage = k.data)
 
-                        setSets(response.data);
-                        setStatus(true);
-                    }
-                );
+                            setSets(response.data);
+                            setStatus(true);
+                        }
+                    );
 
-            })
+                })
+        }
+
 
     }, [clicked]);
 
@@ -56,7 +80,7 @@ function Learn() {
 
                                 {sets.map(set => (
                                     <SetItem
-                                        handleClick = {setParam}
+                                        handleClick = {handleClick}
                                         key = {set.id}
                                         id={set.id} 
                                         src={set.setImage}
@@ -72,7 +96,7 @@ function Learn() {
                     </div>
                 </div>
             ) : (
-                <LearnSection setClicked={setClicked}/>
+                <LearnSection setClicked={setClicked} setName={setName} setId={setId} type={type}/>
             )}
         </>
     );

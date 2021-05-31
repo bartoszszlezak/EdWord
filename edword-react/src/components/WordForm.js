@@ -5,18 +5,16 @@ import Service from './ServiceWord';
 import validate from './validateWord';
 
 
-const WordForm = ({submitForm}) => {
+const WordForm = (props) => {
 
-    const {handleChange, handleSubmit, handleClick, values, errors, words, isSubmitting} = Service(submitForm, validate);
+    const {handleChange, handleSubmit, handleClick, values, errors, words, isSubmitting} = Service(props.submitForm, validate);
 
     
   useEffect(
     () => {
 
         if(isSubmitting){
-            console.log("useEffect, words length");
-            console.log("Words useEffect");
-            console.log(words);
+            console.log(values);
             words.push(values);
         }
         
@@ -70,7 +68,7 @@ const WordForm = ({submitForm}) => {
                 {words.map(w => (
                     <div key={w.word} className='word-wrapper'>
                         <p className='word-list-element'>
-                            {w.word} <i class="fas fa-arrow-alt-circle-right"></i> {w.translation}
+                            {w.word} <i className="fas fa-arrow-alt-circle-right"/> {w.translation}
                         </p>
                     </div>
                 ))}

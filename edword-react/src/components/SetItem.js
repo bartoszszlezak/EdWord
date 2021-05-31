@@ -7,7 +7,7 @@ function SetItem(props) {
 
     return (
         <>
-            <li className='set_item' onClick={() => props.handleClick(props.id, props.type)}>
+            <li className='set_item' onClick={() => props.handleClick(props.id, props.type, props.text)}>
                 <div className='set_item_link'>
                     <figure className='set_item_wraper' data-category={props.label}>
                         <img

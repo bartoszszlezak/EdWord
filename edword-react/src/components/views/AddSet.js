@@ -20,10 +20,10 @@ function AddSet() {
             ) : (
                 <div className='succes-signup'>
                     {/* <video src={video} autoPlay loop muted /> */}
-                    <Link to='/addword'>
+                    <Link to='/addword/'>
                         <button>Your set was created succesfully</button>
                     </Link>
-                </div>  
+                </div>
             )}
 
         </>

@@ -59,7 +59,7 @@ public class UserController {
         String salt = userRepository.getSaltByEmail(details.getEmail());
 
         if(salt==null){
-            return null;
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
 
         User loginUser = userRepository.getUserByEmailAndPassword(
