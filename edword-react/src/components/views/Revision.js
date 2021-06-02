@@ -39,7 +39,7 @@ function Revision() {
                     "Authorization": "Bearer " + localStorage.getItem('token')
                 }
             };
-            const user_id = auth.auth.first;
+            const user_id = localStorage.getItem("id");
             api.get('/' + user_id, config)
                 .then(response => {
                     Promise.all(response.data.map(num =>
@@ -84,7 +84,7 @@ function Revision() {
                                         src={set.setImage}
                                         text={set.setName}
                                         label={set.language}
-                                        type="REVISION"
+                                        type="revision"
                                     />
                                 ))}
 

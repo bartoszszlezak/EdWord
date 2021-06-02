@@ -12,4 +12,5 @@ public interface WordSetRepository extends CrudRepository<WordSet, Long> {
     @Transactional
     @Query(value = "SELECT * FROM wordsets WHERE owner_id=?1", nativeQuery = true)
     Iterable<WordSet> getWordSetByUserId(Long id);
+
 }
