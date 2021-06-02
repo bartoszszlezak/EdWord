@@ -26,8 +26,10 @@ function Navbar(){
         
         dispatch(signout()).then(() => {
             history.replace('/');
+            setStatus(false);
+            setInfo({role: "NULL", name: "NULL"});
         })
-        if(!auth.login){
+        if(localStorage.getItem("token") === null){
             setClicked(false);
         }
     }
@@ -36,13 +38,14 @@ function Navbar(){
     const [status, setStatus] = useState(false);
 
     useEffect(() => {
-        if (auth.login) {
-            const token= auth.user.second;
+        if (localStorage.getItem("token") !== null) {
+            const token= localStorage.getItem("token");
             setInfo(jwt_decode(token)) ;
             setStatus(true);
             console.log(info);
         }
-    }, [status]);
+        console.log(info);
+    }, [status, auth.login]);
 
     
 
@@ -84,7 +87,7 @@ return(
                             Sets
                         </Link>
                     </li>
-                    {(auth.login) ? (
+                    {(localStorage.getItem("token") !== null) ? (
                         <li className='nav-page'>
                             <Link className='nav-page-link-mobile' to='/' onClick={handleLogout}>
                                 Sign out
@@ -98,7 +101,7 @@ return(
                         </li>
                     )}
                 </ul>
-                {(auth.login) ? (
+                {(localStorage.getItem("token") !== null) ? (
                     <Link to='/' className='navbar-but'>
                         <button className='navbar-button' onClick={handleLogout}>
                             Sign out
@@ -112,7 +115,7 @@ return(
                     </Link>
                 )}
 
-            <Notification/>
+            {/*<Notification/>*/}
             </div>
           </nav>
       </>

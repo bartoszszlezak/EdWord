@@ -40,14 +40,14 @@ public class WordSetController {
     }
 
 
-
-
-
-
-
     @GetMapping(value = "/wordsets/{id}")
     public Iterable<WordSet> getWordSets(@PathVariable("id") Long id){
         return wordSetRepository.getWordSetByUserId(id);
+    }
+
+    @GetMapping(value = "/wordsets/admin")
+    public Iterable<WordSet> getWordSetsAdmin(){
+        return wordSetRepository.findAll();
     }
 
 
@@ -77,9 +77,11 @@ public class WordSetController {
 
     @GetMapping(value = "/wordset/words/{id}")
     public Iterable<Word> getWordSetWords(@PathVariable("id") Long id){
-
         return wordRepository.getWordsBySetId(id);
     }
 
-
+    @GetMapping(value = "/wordset/words/{id}/{status}")
+    public Iterable<Word> getWordSetWordsWithStatus(@PathVariable("id") Long id, @PathVariable("status") String status){
+        return wordRepository.getWordsBySetIdWithStatus(id, status);
+    }
 }

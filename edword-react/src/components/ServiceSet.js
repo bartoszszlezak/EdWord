@@ -12,12 +12,11 @@ const api = axios.create({
 const ServiceSet = (submitForm, validate) => {
 
   const {setSetId, getId} = ServiceSetId();
-  const user = useSelector(state => state.auth.auth.first)
   const [values, setValues] = useState({
     setName: '',
     language: '',
     setImage: '',
-    userId: user
+    userId: localStorage.getItem("id")
   });
 
   let file = '';
@@ -68,7 +67,7 @@ const ServiceSet = (submitForm, validate) => {
                 setName: '',
                 language: '',
                 setImage: '',
-                userId: user
+                userId: localStorage.getItem("id")
             });
         });
 }
