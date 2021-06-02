@@ -8,67 +8,105 @@ import {useHistory} from "react-router-dom";
 
 
 const api = axios.create({
-    baseURL: `http://localhost:8080/wordset/words`
+    baseURL: `http://localhost:8080/`
 })
+
+let index;
 
 function LearnSection(props) {
 
 
-    const [word, setWord] = useState("Click Me");
-    const [translation, setTranslation] = useState("");
-    const [content, setContent] = useState(word);
+    const [word, setWord] = useState("Click Next");
+    const [translation, setTranslation] = useState("Click Next");
     const [status, setStatus] = useState(false);
     const auth = useSelector(state => state.auth);
     const history = useHistory();
+
+
+    if(!auth.login){
+        history.push("/");
+    }
 
     const [words, setWords] = useState([]);
     const [clicked, setClicked] = useState(false);
 
     const handleClick = () => {
-        if(content === word){
-            setContent(translation);
-            setStatus(true);
-        }
-        else {
-            setContent(word);
+        if(status === true){
             setStatus(false);
         }
+        else {
+            setStatus(true);
+        }
+
+    }
+
+    const handleDone = () => {
+
+        const config = {
+            headers: {
+                "Authorization": "Bearer " + localStorage.getItem('token')
+            }
+        };
+
+
+        if(words.length > 0){
+            api.get('word/update/' + words[index].id, config)
+            words.splice(index,1);
+            if(words.length !==0){
+                index = Math.floor(Math.random() * words.length);
+                setWord(words[index].content);
+                setTranslation(words[index].translation);
+                setStatus(true);
+            }
+        }
+        else{
+            setWord("Nothing to learn");
+            setTranslation("Nothing to learn");
+            setStatus(true);
+        }
+
+
 
     }
 
     const handleNext = () => {
-        if(clicked === false)
+        if(clicked === false){
             setClicked(true);
-        else
+            setStatus(true);
+        }
+        else{
             setClicked(false);
+            setStatus(true);
+        }
+
     }
 
     useEffect(() => {
 
-        if(!auth.login){
-            history.push("/");
-        }
-        else {
-            const config = {
-                headers: {
-                    "Authorization": "Bearer " + localStorage.getItem('token')
-                }
-            };
+        const config = {
+            headers: {
+                "Authorization": "Bearer " + localStorage.getItem('token')
+            }
+        };
 
-            api.get('/' + props.setId +"/"+ props.type, config)
-                .then(response => {
-                    setWords(response.data);
-                })
-        }
+        api.get('/wordset/words/' + props.setId +"/"+ props.type, config)
+            .then(response => {
+                setWords(response.data);
+            })
+
     }, []);
 
 
     useEffect(() => {
 
         if(words.length > 0){
-            let index = Math.floor(Math.random() * words.length);
+            index = Math.floor(Math.random() * words.length);
             setWord(words[index].content);
             setTranslation(words[index].translation);
+        }
+        else {
+            setWord("Click Next");
+            setTranslation("Click Next");
         }
     }, [clicked])
 
@@ -77,19 +115,19 @@ function LearnSection(props) {
         
         <div className='learn-section'>
             <video src={video} autoPlay loop muted />
-            {
-                props.setName + " " + props.setId + props.type
-            }
+
+            <h1 className="set_name">You are in set: {props.setName}</h1>
+
             {(status) ? (
                 <Flashcard status onClick={handleClick}>
                     <div className="flashcard_content">
-                        {content}
+                        {word}
                     </div>
                 </Flashcard>
             ) : (
                 <Flashcard onClick={handleClick}>
                     <div className="flashcard_content">
-                        {content}
+                        {translation}
                     </div>
                 </Flashcard>
             )}
@@ -98,7 +136,7 @@ function LearnSection(props) {
                 <button onClick={handleNext}>
                     Next
                 </button>
-                <button>
+                <button onClick={handleDone}>
                     Done
                 </button>
                 <button onClick = {() => props.setClicked(false)} >

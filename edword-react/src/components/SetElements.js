@@ -36,7 +36,7 @@ function SetElements(props) {
     return(
         <div className='words_container'>
             <video src={video} autoPlay loop muted />
-            <p className='set_name'>Words from set {props.setName}</p>
+            <h1 className='set_name'>Words from set: {props.setName}</h1>
             <div className='words-list'>
                 {words.map(w => (
                     <div className='word-wrapper'>
