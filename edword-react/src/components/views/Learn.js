@@ -5,8 +5,6 @@ import React, {useEffect, useState} from 'react';
 import axios from "axios";
 import {useSelector} from "react-redux";
 import {useHistory} from "react-router-dom";
-import video from "../../videos/video5.mp4";
-import RevisionSection from "../RevisionSection";
 
 const api = axios.create({
     baseURL: `http://localhost:8080/wordsets`

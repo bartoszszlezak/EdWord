@@ -32,9 +32,9 @@ function Sets() {
 
     const [sets, setSets] = useState([]);
     const [status, setStatus] = useState(false);
-    const token= localStorage.getItem("token");
 
     useEffect(() => {
+
         if(!auth.login){
             history.push("/");
         }
@@ -45,6 +45,7 @@ function Sets() {
                 }
             };
             const user_id = localStorage.getItem("id");
+            const token= localStorage.getItem("token");
             if(jwt_decode(token).role === "ADMIN"){
                 api.get('/admin', config)
                     .then(response => {
@@ -95,11 +96,12 @@ function Sets() {
         {(!clicked) ? (
             <div className='sets'>
             <div className="sets_header_container">
-                {(jwt_decode(token).role === "ADMIN") ? (
+                {(localStorage.getItem("token")) !== null ? (
+                    (jwt_decode(localStorage.getItem("token")).role === "ADMIN") ? (
                         <h1 className="sets_header">All sets</h1>
                     ) : (
-                    <h1 className="sets_header">Your sets</h1>
-                )}
+                        <h1 className="sets_header">Your sets</h1>
+                    )) : null}
 
                 <Link to="/addset">
                     <button>New set</button>

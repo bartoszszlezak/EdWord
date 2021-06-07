@@ -4,8 +4,6 @@ import {useSelector} from "react-redux";
 import {useHistory} from "react-router-dom";
 import SetItem from "../SetItem";
 import axios from "axios";
-import video from "../../videos/video5.mp4";
-import LearnSection from "../LearnSection";
 
 const api = axios.create({
     baseURL: `http://localhost:8080/wordsets`

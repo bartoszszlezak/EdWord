@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import './styles/SignUpForm.css';
-// import video from '../videos/video1.mp4';
 import Service from './ServiceSet';
 import validate from './validateSet';
 
@@ -12,7 +11,6 @@ const SetForm = ({submitForm}) => {
 
     return (
         <div className='setform-section'>
-            {/* <video src={video} autoPlay loop muted /> */}
             <h1>Create Set</h1>
             <div className="setform-container">
                 <form className='sign-up-form' onSubmit={handleSubmit}>
