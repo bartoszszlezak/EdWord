@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-// import {handleSetId} from "./ServiceSet";
 import ServiceSetId from "./ServiceSetId";
 
 const api = axios.create({

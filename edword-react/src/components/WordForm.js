@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import './styles/WordForm.css';
-// import video from '../videos/video1.mp4';
 import Service from './ServiceWord';
 import validate from './validateWord';
 
@@ -14,7 +13,6 @@ const WordForm = (props) => {
     () => {
 
         if(isSubmitting){
-            console.log(values);
             words.push(values);
         }
         
@@ -25,7 +23,6 @@ const WordForm = (props) => {
 
     return (
         <div className='wordform-section'>
-            {/* <video src={video} autoPlay loop muted /> */}
             <h1>Add Words</h1>
             <div className="wordform-container">
                 <form className='wordform-form' onSubmit={handleClick}>

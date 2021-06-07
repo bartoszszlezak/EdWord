@@ -1,6 +1,4 @@
 import React from 'react'
-import {Link} from 'react-router-dom'
-import Learn from '../components/views/Learn'
 
 function SetItem(props) {
 

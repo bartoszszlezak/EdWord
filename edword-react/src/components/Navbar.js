@@ -42,9 +42,7 @@ function Navbar(){
             const token= localStorage.getItem("token");
             setInfo(jwt_decode(token)) ;
             setStatus(true);
-            console.log(info);
         }
-        console.log(info);
     }, [status, auth.login]);
 
     

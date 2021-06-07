@@ -26,7 +26,6 @@ function SetElements(props) {
             };
             api.get('/words/' + props.setId, config).then(
                 response => {
-                    console.log(response.data);
                     setWords(response.data);
                 }
             )
